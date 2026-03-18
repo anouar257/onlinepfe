@@ -1,0 +1,90 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Bienvenue, Isabelle ! 👋</h1>
+        <p class="page-subtitle">Voici l'aperçu de la progression de vos enfants cette semaine.</p>
+    </div>
+
+    <!-- Quick Stats Overview -->
+    <div class="stats-overview">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(14, 97, 217, 0.1); color: var(--color-primary);">
+                <span class="material-symbols-outlined">schedule</span>
+            </div>
+            <div class="stat-info">
+                <h3>14h 30m</h3>
+                <p>Temps d'apprentissage total</p>
+            </div>
+            <div class="stat-trend positive">+2h cette semaine</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(5, 150, 105, 0.1); color: #059669;">
+                <span class="material-symbols-outlined">task_alt</span>
+            </div>
+            <div class="stat-info">
+                <h3>12 Leçons</h3>
+                <p>Complétées cette semaine</p>
+            </div>
+            <div class="stat-trend positive">+3 vs semaine dernière</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(245, 166, 35, 0.1); color: #F5A623;">
+                <span class="material-symbols-outlined">star</span>
+            </div>
+            <div class="stat-info">
+                <h3>17.5 / 20</h3>
+                <p>Moyenne générale (Tous enfants)</p>
+            </div>
+            <div class="stat-trend neutral">= Stable</div>
+        </div>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Children Overview -->
+        <div class="dashboard-card children-card">
+            <div class="card-header">
+                <h2>Progression des enfants</h2>
+                <button class="btn-text">Voir détails <span class="material-symbols-outlined">arrow_forward</span></button>
+            </div>
+            <div class="card-content">
+                <div class="child-row" *ngFor="let child of children">
+                    <img src="https://i.pravatar.cc/150?u={{child.name}}" alt="{{ child.name }}" class="child-avatar">
+                    <div class="child-info">
+                        <h4>{{ child.name }} <span class="badge-grade">{{ child.grade }}</span></h4>
+                        <p>En cours: <strong>{{ child.activeCourse }}</strong></p>
+                    </div>
+                    <div class="child-progress">
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" [style.width.%]="child.progress"></div>
+                        </div>
+                        <span class="progress-text">{{ child.progress }}% complet</span>
+                    </div>
+                    <div class="child-grade">
+                        <span class="label">Dernier test</span>
+                        <span class="score">{{ child.recentGrade }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity Timeline -->
+        <div class="dashboard-card activity-card">
+            <div class="card-header">
+                <h2>Activité Récente</h2>
+            </div>
+            <div class="card-content">
+                <ul class="activity-timeline">
+                    <li *ngFor="let act of recentActivities">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h4>{{ act.child }} - {{ act.subject }}</h4>
+                            <p>{{ act.action }} <strong *ngIf="act.score">({{ act.score }})</strong></p>
+                            <span class="time">{{ act.time }}</span>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

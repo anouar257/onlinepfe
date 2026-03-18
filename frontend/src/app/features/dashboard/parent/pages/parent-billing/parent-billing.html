@@ -1,0 +1,54 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Abonnements & Facturation 💳</h1>
+        <p class="page-subtitle">Gérez vos abonnements EduPlanet et consultez votre historique de paiement.</p>
+    </div>
+
+    <!-- Active Subscription Card -->
+    <div class="dashboard-card promo-card mb-32">
+        <div class="card-content subscription-flex">
+            <div class="sub-info">
+                <span class="plan-badge">Plan Famille Premium</span>
+                <h2>Accès illimité pour tous vos enfants</h2>
+                <p>Prochain prélèvement : <strong>01 Décembre 2026</strong> (45.00 € / mois)</p>
+            </div>
+            <div class="sub-actions">
+                <button class="btn-primary-large">Mettre à jour la carte</button>
+                <button class="btn-text text-danger">Résilier l'abonnement</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment History -->
+    <div class="dashboard-card">
+        <div class="card-header">
+            <h2>Historique des paiements</h2>
+        </div>
+        <div class="table-responsive">
+            <table class="billing-table">
+                <thead>
+                    <tr>
+                        <th>N° Facture</th>
+                        <th>Date</th>
+                        <th>Montant</th>
+                        <th>Statut</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let inv of invoices">
+                        <td><strong>{{ inv.id }}</strong></td>
+                        <td>{{ inv.date }}</td>
+                        <td>{{ inv.amount }}</td>
+                        <td><span class="status-badge success">{{ inv.status }}</span></td>
+                        <td>
+                            <button class="btn-icon">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

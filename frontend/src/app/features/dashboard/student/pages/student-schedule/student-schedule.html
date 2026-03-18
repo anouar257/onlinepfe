@@ -1,0 +1,39 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Mon Planning 📅</h1>
+        <p class="page-subtitle">Visualisez vos prochains cours en direct pour la semaine.</p>
+    </div>
+
+    <div class="schedule-card dashboard-card">
+        <div class="card-header">
+            <div class="date-navigator">
+                <button class="icon-btn"><span class="material-symbols-outlined">chevron_left</span></button>
+                <h2>02 Nov - 08 Nov 2026</h2>
+                <button class="icon-btn"><span class="material-symbols-outlined">chevron_right</span></button>
+            </div>
+            <button class="btn-primary-outline"><span class="material-symbols-outlined">print</span> Imprimer</button>
+        </div>
+
+        <div class="calendar-wrapper">
+            <table class="calendar-table">
+                <thead>
+                    <tr>
+                        <th class="time-col">Heure</th>
+                        <th *ngFor="let day of weekDays">{{ day }}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let hour of hours; let hIndex = index">
+                        <td class="time-cell">{{ hour }}</td>
+                        <td *ngFor="let day of weekDays; let dIndex = index" class="slot-cell">
+                            <div class="class-block" *ngIf="getClass(dIndex, hIndex) as cls" [style.background]="cls.color + '20'" [style.border-left-color]="cls.color">
+                                <strong>{{ cls.subject }}</strong>
+                                <span>{{ cls.teacher }}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

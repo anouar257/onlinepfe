@@ -1,0 +1,166 @@
+.dashboard-page {
+    animation: fade-in 0.4s ease-out;
+
+    .page-header {
+        margin-bottom: 32px;
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-navy);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+    }
+
+    .dashboard-card {
+        background: white;
+        border-radius: 20px;
+        border: 1px solid #f1f5f9;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+        overflow: hidden;
+
+        .card-header {
+            padding: 24px;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .date-navigator {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+
+                h2 {
+                    font-size: 1.25rem;
+                    font-weight: 700;
+                    color: var(--color-navy);
+                    margin: 0;
+                }
+
+                .icon-btn {
+                    background: #f1f5f9;
+                    border: none;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    color: #64748b;
+                    transition: all 0.2s;
+
+                    &:hover {
+                        background: var(--color-primary);
+                        color: white;
+                    }
+                }
+            }
+
+            .btn-primary-outline {
+                background: white;
+                border: 2px solid var(--color-primary);
+                color: var(--color-primary);
+                padding: 10px 20px;
+                border-radius: 12px;
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                cursor: pointer;
+                transition: all 0.2s;
+
+                &:hover {
+                    background: var(--color-primary);
+                    color: white;
+                }
+            }
+        }
+
+        .calendar-wrapper {
+            overflow-x: auto;
+
+            .calendar-table {
+                width: 100%;
+                border-collapse: collapse;
+                table-layout: fixed;
+                min-width: 800px;
+
+                th, td {
+                    border: 1px solid #f1f5f9;
+                }
+
+                th {
+                    padding: 16px;
+                    background: #f8fafc;
+                    color: #64748b;
+                    font-size: 0.9rem;
+                    text-transform: uppercase;
+                    letter-spacing: 1px;
+                }
+
+                .time-col {
+                    width: 80px;
+                    text-align: center;
+                }
+
+                .time-cell {
+                    text-align: center;
+                    font-weight: 700;
+                    color: #94a3b8;
+                    background: #f8fafc;
+                    padding: 20px 0;
+                }
+
+                .slot-cell {
+                    height: 120px;
+                    vertical-align: top;
+                    padding: 8px;
+                    transition: background 0.2s;
+
+                    &:hover {
+                        background: #f8fafc;
+                    }
+
+                    .class-block {
+                        padding: 12px;
+                        border-radius: 8px;
+                        border-left: 4px solid;
+                        display: flex;
+                        flex-direction: column;
+                        gap: 4px;
+                        cursor: pointer;
+                        transition: transform 0.2s;
+
+                        &:hover {
+                            transform: scale(1.02);
+                        }
+
+                        strong {
+                            color: var(--color-navy);
+                            font-size: 0.95rem;
+                            display: block;
+                        }
+
+                        span {
+                            color: #475569;
+                            font-size: 0.8rem;
+                            display: block;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,28 @@
+<aside class="sidebar-container">
+    <div class="sidebar-header">
+        <a routerLink="/" class="logo">
+            <span class="material-symbols-outlined logo-icon">school</span>
+            EduPlanet
+        </a>
+    </div>
+
+    <nav class="sidebar-nav">
+        <div class="nav-section-title">ESPACE {{ currentRole }}</div>
+        <ul class="nav-list">
+            <li *ngFor="let item of menuItems">
+                <a [routerLink]="item.route" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="nav-link">
+                    <span class="material-symbols-outlined">{{ item.icon }}</span>
+                    {{ item.label }}
+                </a>
+            </li>
+        </ul>
+    </nav>
+    
+    <div class="sidebar-footer">
+        <div class="support-card">
+            <span class="material-symbols-outlined">help</span>
+            <p>Besoin d'aide ?</p>
+            <a href="#">Support En Ligne</a>
+        </div>
+    </div>
+</aside>

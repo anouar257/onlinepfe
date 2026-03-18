@@ -1,0 +1,55 @@
+<div class="pricing-page">
+    <div class="breadcrumb">
+        <div class="bc"><a routerLink="/">Accueil</a><span>›</span><span class="cur">Tarifs</span></div>
+    </div>
+
+    <div class="pricing-header">
+        <h1>Abonnements de la Bibliothèque</h1>
+        <p>Débloquez l'accès illimité à toutes nos vidéos, tests et exercices interactifs.</p>
+    </div>
+
+    <div class="pricing-container">
+        <div class="pricing-grid">
+            @for (plan of plans; track plan.id) {
+            <div class="plan-card" [class.popular]="plan.popular">
+                @if (plan.popular) {
+                <div class="popular-badge">Le plus choisi</div>
+                }
+
+                <div class="plan-header">
+                    <h2>{{ plan.name }}</h2>
+                    <div class="price">
+                        <span class="amount">{{ plan.price }}</span>
+                        <span class="currency">MAD</span>
+                        <span class="period">{{ plan.period }}</span>
+                    </div>
+                    @if (plan.savings) {
+                    <p class="savings">{{ plan.savings }}</p>
+                    }
+                </div>
+
+                <ul class="plan-features">
+                    @for (feature of plan.features; track feature.name) {
+                    <li [class.disabled]="!feature.included">
+                        <span class="material-symbols-outlined icon">
+                            {{ feature.included ? 'check_circle' : 'cancel' }}
+                        </span>
+                        <span class="text">{{ feature.name }}</span>
+                    </li>
+                    }
+                </ul>
+
+                <a routerLink="/register" class="btn-select" [class.primary]="plan.popular">
+                    S'abonner maintenant
+                </a>
+            </div>
+            }
+        </div>
+
+        <div class="faq-preview">
+            <h3>Des questions sur nos tarifs ?</h3>
+            <p>Consultez notre <a routerLink="/faq">FAQ complète</a> ou <a routerLink="/contact">contactez le
+                    support</a>.</p>
+        </div>
+    </div>
+</div>

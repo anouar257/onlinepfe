@@ -1,0 +1,71 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Gestion des Utilisateurs 👥</h1>
+        <p class="page-subtitle">Visualisez et gérez tous les comptes de la plateforme.</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-bar mb-32">
+        <button class="btn-primary"><span class="material-symbols-outlined">person_add</span> Nouvel utilisateur</button>
+        <div class="filters">
+            <select class="form-select">
+                <option value="all">Tous les rôles</option>
+                <option value="student">Étudiants</option>
+                <option value="parent">Parents</option>
+                <option value="teacher">Professeurs</option>
+            </select>
+            <div class="search-box">
+                <span class="material-symbols-outlined">search</span>
+                <input type="text" placeholder="Rechercher nom, email...">
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="table-responsive">
+            <table class="admin-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Utilisateur</th>
+                        <th>Rôle</th>
+                        <th>Inscription</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of users">
+                        <td class="id-cell">#{{ user.id }}</td>
+                        <td>
+                            <div class="user-cell">
+                                <img src="https://i.pravatar.cc/150?u={{user.id}}" alt="Avatar">
+                                <div>
+                                    <strong>{{ user.name }}</strong>
+                                    <small>{{ user.email }}</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="role-badge">{{ user.role }}</span></td>
+                        <td>{{ user.joinDate }}</td>
+                        <td><span class="status-badge" [class.inactive]="user.status === 'Inactif'">{{ user.status }}</span></td>
+                        <td>
+                            <div class="action-buttons">
+                                <button class="btn-icon" title="Modifier"><span class="material-symbols-outlined">edit</span></button>
+                                <button class="btn-icon text-danger" title="Suspendre"><span class="material-symbols-outlined">block</span></button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="card-footer">
+            <p>1 - 4 sur 5,234 utilisateurs</p>
+            <div class="pagination">
+                <button class="btn-icon" disabled><span class="material-symbols-outlined">chevron_left</span></button>
+                <span class="current-page">1</span>
+                <button class="btn-icon"><span class="material-symbols-outlined">chevron_right</span></button>
+            </div>
+        </div>
+    </div>
+</div>

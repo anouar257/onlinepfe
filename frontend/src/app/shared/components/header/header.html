@@ -1,0 +1,71 @@
+<header class="main-header">
+  <div class="header-container">
+    <!-- Logo -->
+    <a routerLink="/" class="logo">
+      <div class="logo-icon">
+        <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+          <rect width="32" height="32" rx="8" fill="#1B4B82" />
+          <path d="M8 22L16 10L24 22H8Z" fill="#F5A623" opacity="0.9" />
+          <circle cx="16" cy="12" r="3" fill="white" />
+        </svg>
+      </div>
+      <span class="logo-text">
+        <span class="logo-main">EduPlanet</span>
+        <span class="logo-sub">Plateforme éducative</span>
+      </span>
+    </a>
+
+    <!-- Navigation -->
+    <nav class="main-nav">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="nav-link">
+        Accueil
+      </a>
+      <a routerLink="/catalog" routerLinkActive="active" class="nav-link">
+        <span class="material-symbols-outlined nav-icon">menu_book</span>
+        Bibliothèque
+      </a>
+      <a routerLink="/about" routerLinkActive="active" class="nav-link">
+        À propos
+      </a>
+      <a routerLink="/pricing" routerLinkActive="active" class="nav-link special-link">
+        <span class="material-symbols-outlined nav-icon">star</span>
+        Abonnements
+      </a>
+      <a routerLink="/tutors" routerLinkActive="active" class="nav-link">
+        Professeurs
+      </a>
+    </nav>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <button class="btn-catalog" routerLink="/catalog">
+        <span class="material-symbols-outlined">grid_view</span>
+        Catalogue
+      </button>
+      <button class="btn-login" routerLink="/login">
+        <span class="material-symbols-outlined">person</span>
+        Connexion
+      </button>
+    </div>
+
+    <!-- Mobile menu toggle -->
+    <button class="mobile-toggle" (click)="toggleMenu()" aria-label="Menu">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu" [class.open]="mobileMenuOpen">
+    <a routerLink="/" class="mobile-link" (click)="closeMenu()">Accueil</a>
+    <a routerLink="/catalog" class="mobile-link" (click)="closeMenu()">Bibliothèque</a>
+    <a routerLink="/pricing" class="mobile-link special" (click)="closeMenu()">Abonnements</a>
+    <a routerLink="/tutors" class="mobile-link" (click)="closeMenu()">Professeurs</a>
+    <a routerLink="/about" class="mobile-link" (click)="closeMenu()">À propos</a>
+    <div class="mobile-actions">
+      <button class="btn-login" routerLink="/login" (click)="closeMenu()">
+        <span class="material-symbols-outlined">person</span>
+        Connexion
+      </button>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,56 @@
+<div class="search-page">
+    <div class="breadcrumb">
+        <div class="bc"><a routerLink="/">Accueil</a><span>›</span><span class="cur">Recherche</span></div>
+    </div>
+
+    <div class="search-container">
+        <div class="search-bar-section">
+            <h1>Recherche</h1>
+            <form class="search-form" (ngSubmit)="onSearch()">
+                <span class="material-symbols-outlined si">search</span>
+                <input type="text" [(ngModel)]="query" name="q" placeholder="Rechercher un cours, une leçon..." />
+                <button type="submit">Rechercher</button>
+            </form>
+        </div>
+
+        @if (isSearching) {
+        <div class="loading"><span class="spinner"></span> Recherche en cours...</div>
+        } @else if (results.length > 0) {
+        <p class="results-count">{{ results.length }} résultat(s) pour « {{ query }} »</p>
+        <div class="results-list">
+            @for (lesson of results; track lesson.id) {
+            <a [routerLink]="['/lessons', lesson.id]" class="result-card">
+                <div class="result-badge" [style.background]="getSubjectColor(lesson.subjectId)">
+                    {{ getSubjectName(lesson.subjectId) | slice:0:2 }}
+                </div>
+                <div class="result-info">
+                    <span class="result-subject" [style.color]="getSubjectColor(lesson.subjectId)">{{
+                        getSubjectName(lesson.subjectId) }}</span>
+                    <h3>{{ lesson.title }}</h3>
+                    <p>{{ lesson.summary }}</p>
+                    <div class="result-meta">
+                        <span><span class="material-symbols-outlined">schedule</span> {{ lesson.duration }}</span>
+                        @if (lesson.hasVideo) { <span><span class="material-symbols-outlined">play_circle</span>
+                            Vidéo</span> }
+                        @if (lesson.hasNotes) { <span><span class="material-symbols-outlined">description</span>
+                            Résumé</span> }
+                    </div>
+                </div>
+            </a>
+            }
+        </div>
+        } @else if (query) {
+        <div class="no-results">
+            <span class="material-symbols-outlined">search_off</span>
+            <h3>Aucun résultat trouvé</h3>
+            <p>Essayez avec d'autres mots-clés ou parcourez notre <a routerLink="/catalog">bibliothèque</a>.</p>
+        </div>
+        } @else {
+        <div class="no-results">
+            <span class="material-symbols-outlined">search</span>
+            <h3>Recherchez un cours</h3>
+            <p>Tapez un mot-clé pour trouver un cours dans notre bibliothèque.</p>
+        </div>
+        }
+    </div>
+</div>

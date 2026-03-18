@@ -1,0 +1,310 @@
+<div class="home-page">
+    <!-- Hero Section Carousel -->
+    <section class="hero" [style.background]="slides[currentSlideIndex].bgColor">
+        <div class="hero-container">
+            <!-- Carousel Slides -->
+            <div class="carousel-track">
+                @for (slide of slides; track $index) {
+                <div class="carousel-slide" [class.active]="currentSlideIndex === $index">
+                    <div class="hero-content">
+                        <p class="hero-subtitle">{{ slide.subtitle }}</p>
+                        <h1 class="hero-title">
+                            {{ slide.title }}
+                            <span class="hero-highlight">{{ slide.highlight }}</span>
+                        </h1>
+                        @if ($index === 0) {
+                        <form class="hero-search" (ngSubmit)="onSearch()">
+                            <span class="material-symbols-outlined search-icon">search</span>
+                            <input type="text" placeholder="Rechercher un cours, une matière..." class="search-input"
+                                [(ngModel)]="searchQuery" name="q" />
+                            <button type="submit" class="search-btn">Rechercher</button>
+                        </form>
+                        } @else {
+                        <button class="search-btn hero-cta" routerLink="/catalog">Découvrir le catalogue</button>
+                        }
+                    </div>
+                    <div class="hero-image">
+                        <img [src]="slide.image" alt="Illustration éducative">
+                    </div>
+                </div>
+                }
+            </div>
+
+            <!-- Indicators -->
+            <div class="carousel-indicators">
+                @for (slide of slides; track $index) {
+                    <button class="dot" [class.active]="currentSlideIndex === $index" (click)="goToSlide($index)" aria-label="Go to slide"></button>
+                }
+            </div>
+
+            <!-- Modern Photo Service Cards -->
+            <div class="hero-cards">
+                <a routerLink="/catalog" class="photo-card" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?auto=format&fit=crop&w=400&q=80" alt="École en ligne">
+                    <div class="card-overlay">
+                        <span class="card-title">École en ligne</span>
+                        <span class="card-subtitle">De la primaire au lycée</span>
+                    </div>
+                </a>
+                <a routerLink="/catalog" class="photo-card" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=400&q=80" alt="Bibliothèque">
+                    <div class="card-overlay">
+                        <span class="card-title">Bibliothèque</span>
+                        <span class="card-subtitle">Des milliers de leçons</span>
+                    </div>
+                </a>
+                <a routerLink="/catalog" class="photo-card" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=400&q=80" alt="Collège en ligne">
+                    <div class="card-overlay">
+                        <span class="card-title">Soutien scolaire</span>
+                        <span class="card-subtitle">Aide aux devoirs 24/7</span>
+                    </div>
+                </a>
+                <a routerLink="/catalog" class="photo-card" data-aos="fade-up" data-aos-delay="400">
+                    <img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=400&q=80" alt="Préparation examens">
+                    <div class="card-overlay">
+                        <span class="card-title">Préparation examens</span>
+                        <span class="card-subtitle">Entraînement intensif</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Level Selector Section -->
+    <section class="levels-section" data-aos="fade-up">
+        <div class="section-container">
+            <h2 class="section-title">Pour qui choisissons-nous les cours ?</h2>
+            <div class="levels-grid">
+                @for (level of levels; track level.id) {
+                <button class="level-card" [class.active]="activeLevel === level.id" (click)="filterByLevel(level.id)" data-aos="zoom-in" [attr.data-aos-delay]="100 * $index">
+                    <div class="level-icon">
+                        <span class="material-symbols-outlined">{{ getLevelIcon(level.id) }}</span>
+                    </div>
+                    <span class="level-name">{{ level.name }}</span>
+                </button>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Subjects Section -->
+    <section class="subjects-section" data-aos="fade-up">
+        <div class="section-container">
+            <h2 class="section-title">Nos matières</h2>
+            <p class="section-desc">Explorez notre bibliothèque complète de cours dans toutes les disciplines</p>
+            <div class="subjects-grid">
+                @for (subject of filteredSubjects; track subject.id) {
+                <a [routerLink]="['/catalog']" [queryParams]="{ subject: subject.id }" class="subject-card"
+                    [style.--accent]="subject.colorCode" data-aos="fade-up" [attr.data-aos-delay]="50 * $index">
+                    <div class="subject-image">
+                        <img [src]="subject.image" [alt]="subject.name" *ngIf="subject.image">
+                        <div class="icon-badge" [style.background]="subject.colorCode">
+                            <span class="material-symbols-outlined">{{ subject.icon }}</span>
+                        </div>
+                    </div>
+                    <div class="subject-info">
+                        <h3>{{ subject.name }}</h3>
+                        <p>{{ subject.description }}</p>
+                        <div class="subject-levels">
+                            @for (lvl of subject.levels; track lvl) {
+                            <span class="level-badge">{{ lvl }}</span>
+                            }
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined arrow-icon">arrow_forward</span>
+                </a>
+                }
+            </div>
+        </div>
+    </section>
+
+    <!-- Parallax Section -->
+    <section class="parallax-section" data-aos="fade-in">
+        <div class="parallax-overlay">
+            <h2 data-aos="fade-up">Découvrez une nouvelle façon d'apprendre</h2>
+            <p data-aos="fade-up" data-aos-delay="100">Des ressources illimitées pour garantir la réussite scolaire de vos enfants.</p>
+            <a routerLink="/register" class="btn-primary-large" data-aos="zoom-in" data-aos-delay="200">Rejoindre EduPlanet</a>
+        </div>
+    </section>
+
+    <!-- Live Schedule Section -->
+    <section class="schedule-section" data-aos="fade-up">
+        <div class="section-container">
+            <div class="section-header-split">
+                <div>
+                    <h2 class="section-title">Calendrier des cours en direct</h2>
+                    <p class="section-desc">Rejoignez nos sessions interactives animées par des experts</p>
+                </div>
+                <a routerLink="/tutors" class="header-link">Voir tout le planning <span class="material-symbols-outlined">arrow_forward</span></a>
+            </div>
+            
+            <div class="schedule-grid">
+                <!-- Card 1 -->
+                <div class="schedule-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="time-header">
+                        <span class="material-symbols-outlined">calendar_today</span>
+                        <span>Aujourd'hui, 17:00 (45 min)</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="subject-tag" style="background:#4F46E5;color:white">Mathématiques</span>
+                        <h3>Les équations différentielles</h3>
+                        <div class="teacher-info">
+                            <img src="https://i.pravatar.cc/150?img=12" alt="Professeur">
+                            <span>Prof. Laurent M.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="schedule-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="time-header">
+                        <span class="material-symbols-outlined">calendar_today</span>
+                        <span>Demain, 14:30 (60 min)</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="subject-tag" style="background:#059669;color:white">SVT</span>
+                        <h3>Génétique et évolution</h3>
+                        <div class="teacher-info">
+                            <img src="https://i.pravatar.cc/150?img=5" alt="Professeur">
+                            <span>Dr. Sophie B.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="schedule-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="time-header">
+                        <span class="material-symbols-outlined">calendar_today</span>
+                        <span>Mercredi, 18:00 (45 min)</span>
+                    </div>
+                    <div class="card-content">
+                        <span class="subject-tag" style="background:#7C3AED;color:white">Anglais</span>
+                        <h3>Conversation Level B2/C1</h3>
+                        <div class="teacher-info">
+                            <img src="https://i.pravatar.cc/150?img=60" alt="Professeur">
+                            <span>Mr. John D.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why EduPlanet Section -->
+    <section class="why-section" data-aos="fade-up">
+        <div class="section-container">
+            <h2 class="section-title">Pourquoi choisir EduPlanet ?</h2>
+            <div class="features-grid">
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="feature-icon" style="--feat-color: #4F46E5;">
+                        <span class="material-symbols-outlined">play_circle</span>
+                    </div>
+                    <h3>Vidéos de qualité</h3>
+                    <p>Des cours vidéo enregistrés par des enseignants expérimentés avec des explications claires.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="feature-icon" style="--feat-color: #059669;">
+                        <span class="material-symbols-outlined">schedule</span>
+                    </div>
+                    <h3>Apprenez à votre rythme</h3>
+                    <p>Étudiez quand vous voulez, où vous voulez. Pas de contraintes d'horaire.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-icon" style="--feat-color: #F5A623;">
+                        <span class="material-symbols-outlined">library_books</span>
+                    </div>
+                    <h3>Résumés complets</h3>
+                    <p>Chaque leçon dispose d'un résumé textuel détaillé pour réviser efficacement.</p>
+                </div>
+                <div class="feature-card" data-aos="fade-up" data-aos-delay="400">
+                    <div class="feature-icon" style="--feat-color: #E11D48;">
+                        <span class="material-symbols-outlined">groups</span>
+                    </div>
+                    <h3>Communauté active</h3>
+                    <p>Échangez avec d'autres étudiants et enseignants via les discussions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section" data-aos="fade-up">
+        <div class="section-container">
+            <div class="stats-grid">
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="100">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Matières</span>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="200">
+                    <span class="stat-number">100+</span>
+                    <span class="stat-label">Leçons vidéo</span>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="300">
+                    <span class="stat-number">6</span>
+                    <span class="stat-label">Niveaux scolaires</span>
+                </div>
+                <div class="stat-item" data-aos="zoom-in" data-aos-delay="400">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Accès disponible</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="section-container">
+            <h2 class="section-title" data-aos="fade-up">Ce que disent nos élèves et parents</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"EduPlanet a complètement changé la façon dont ma fille apprend. Les vidéos sont claires et les professeurs sont exceptionnels. Ses notes en maths ont explosé !"</p>
+                    <div class="author">
+                        <img src="https://i.pravatar.cc/150?img=47" alt="Sarah Dupont">
+                        <div class="author-info">
+                            <h4>Sarah Dupont</h4>
+                            <span>Mère d'élève en 3ème</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"Je n'aimais pas la physique avant. Avec les résumés et les exercices interactifs d'EduPlanet, j'ai enfin compris les concepts difficiles. Merci !"</p>
+                    <div class="author">
+                        <img src="https://i.pravatar.cc/150?img=11" alt="Lucas Martin">
+                        <div class="author-info">
+                            <h4>Lucas Martin</h4>
+                            <span>Élève de Terminale S</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-aos="fade-up" data-aos-delay="300">
+                    <div class="stars">★★★★★</div>
+                    <p class="quote">"La plateforme est ultra fluide et moderne. Trouver un professeur particulier a été un jeu d'enfant. C'est parfait pour préparer les examens."</p>
+                    <div class="author">
+                        <img src="https://i.pravatar.cc/150?img=33" alt="Thomas Roux">
+                        <div class="author-info">
+                            <h4>Thomas Roux</h4>
+                            <span>Étudiant Universitaire</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA Section -->
+    <section class="cta-section">
+        <div class="section-container">
+            <div class="cta-content" data-aos="zoom-in">
+                <h2>Prêt à transformer vos résultats scolaires ?</h2>
+                <p>Rejoignez des milliers d'élèves qui ont déjà choisi l'excellence avec EduPlanet. L'inscription est gratuite !</p>
+                <div class="cta-actions">
+                    <a routerLink="/register" class="btn-primary-large">Commencer gratuitement</a>
+                    <a routerLink="/catalog" class="btn-secondary-large">Explorer les cours</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

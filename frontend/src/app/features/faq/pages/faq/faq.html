@@ -1,0 +1,50 @@
+<div class="faq-page">
+    <div class="breadcrumb">
+        <div class="bc"><a routerLink="/">Accueil</a><span>›</span><span class="cur">FAQ</span></div>
+    </div>
+
+    <div class="faq-container">
+        <div class="faq-header">
+            <h1>Questions fréquentes</h1>
+            <p>Retrouvez les réponses aux questions les plus courantes sur EduPlanet</p>
+        </div>
+
+        <div class="faq-content">
+            @for (cat of categories; track cat.name; let ci = $index) {
+            <div class="faq-category">
+                <div class="cat-header">
+                    <span class="material-symbols-outlined cat-icon">{{ cat.icon }}</span>
+                    <h2>{{ cat.name }}</h2>
+                </div>
+
+                <div class="faq-list">
+                    @for (item of cat.items; track item.question; let fi = $index) {
+                    <div class="faq-item" [class.open]="item.open">
+                        <button class="faq-question" (click)="toggleFaq(ci, fi)">
+                            <span>{{ item.question }}</span>
+                            <span class="material-symbols-outlined chevron">
+                                {{ item.open ? 'expand_less' : 'expand_more' }}
+                            </span>
+                        </button>
+                        @if (item.open) {
+                        <div class="faq-answer">
+                            <p>{{ item.answer }}</p>
+                        </div>
+                        }
+                    </div>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="faq-cta">
+            <h3>Vous ne trouvez pas ce que vous cherchez ?</h3>
+            <p>N'hésitez pas à nous contacter, notre équipe se fera un plaisir de vous aider.</p>
+            <a routerLink="/contact" class="cta-btn">
+                <span class="material-symbols-outlined">mail</span>
+                Contactez-nous
+            </a>
+        </div>
+    </div>
+</div>

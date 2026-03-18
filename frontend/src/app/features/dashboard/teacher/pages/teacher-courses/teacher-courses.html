@@ -1,0 +1,35 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Gestion de Mes Cours 📚</h1>
+        <p class="page-subtitle">Ajoutez des leçons, mettez à jour les fichiers et gérez vos programmes.</p>
+    </div>
+
+    <!-- Actions -->
+    <div class="actions-bar mb-32">
+        <button class="btn-primary"><span class="material-symbols-outlined">add</span> Créer un nouveau cours</button>
+        <div class="search-box">
+            <span class="material-symbols-outlined">search</span>
+            <input type="text" placeholder="Rechercher dans mes cours...">
+        </div>
+    </div>
+
+    <div class="courses-grid">
+        <div class="course-card" *ngFor="let course of myCourses">
+            <div class="card-cover">
+                <span class="material-symbols-outlined">calculate</span>
+            </div>
+            <div class="card-content">
+                <h2>{{ course.title }}</h2>
+                <div class="course-stats">
+                    <span><span class="material-symbols-outlined">groups</span> {{ course.students }}</span>
+                    <span><span class="material-symbols-outlined">play_circle</span> {{ course.lessons }} leçons</span>
+                    <span><span class="material-symbols-outlined">star</span> {{ course.rating }}</span>
+                </div>
+                <div class="card-actions">
+                    <button class="btn-primary-outline"><span class="material-symbols-outlined">edit</span> Modifier</button>
+                    <button class="btn-text">Ajouter leçon</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

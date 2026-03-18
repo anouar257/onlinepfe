@@ -1,0 +1,249 @@
+.search-page {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.breadcrumb {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 14px 0;
+}
+
+.bc {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .cur {
+        color: #64748b;
+    }
+}
+
+.search-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px;
+}
+
+.search-bar-section {
+    margin-bottom: 32px;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--color-navy);
+        margin-bottom: 20px;
+    }
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+    padding: 6px;
+    border: 2px solid #e2e8f0;
+    transition: border-color 0.2s;
+
+    &:focus-within {
+        border-color: var(--color-primary);
+    }
+}
+
+.si {
+    padding: 0 12px 0 16px;
+    color: #94a3b8;
+    font-size: 22px;
+}
+
+.search-form input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 0.95rem;
+    color: var(--color-navy);
+    background: transparent;
+
+    &::placeholder {
+        color: #94a3b8;
+    }
+}
+
+.search-form button {
+    padding: 12px 28px;
+    border: none;
+    border-radius: 12px;
+    background: var(--gradient-orange);
+    color: white;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.25s;
+
+    &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 12px rgba(27, 75, 130, 0.3);
+    }
+}
+
+.results-count {
+    font-size: 0.9rem;
+    color: #64748b;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.result-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 20px 24px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+        border-color: var(--color-primary);
+    }
+}
+
+.result-badge {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+    text-transform: uppercase;
+}
+
+.result-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.result-subject {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.result-info h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin: 4px 0 6px;
+}
+
+.result-info p {
+    font-size: 0.82rem;
+    color: #94a3b8;
+    line-height: 1.4;
+    margin-bottom: 8px;
+}
+
+.result-meta {
+    display: flex;
+    gap: 16px;
+
+    span {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.75rem;
+        color: #94a3b8;
+        font-weight: 500;
+
+        .material-symbols-outlined {
+            font-size: 14px;
+        }
+    }
+}
+
+.loading {
+    text-align: center;
+    padding: 60px;
+    color: #64748b;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.spinner {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #e2e8f0;
+    border-top-color: var(--color-primary);
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.no-results {
+    text-align: center;
+    padding: 80px 40px;
+    color: #94a3b8;
+
+    .material-symbols-outlined {
+        font-size: 64px;
+        margin-bottom: 16px;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+        color: var(--color-navy);
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 0.9rem;
+
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}

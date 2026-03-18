@@ -1,0 +1,49 @@
+<div class="catalog-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a routerLink="/">Accueil</a>
+            <span class="separator">›</span>
+            <span class="current">Bibliothèque</span>
+        </div>
+    </div>
+
+    <div class="catalog-container">
+        <div class="catalog-header">
+            <h1>Bibliothèque des cours</h1>
+            <p>Explorez toutes les matières et choisissez le niveau qui vous correspond</p>
+        </div>
+
+        <!-- Level Filters -->
+        <div class="level-filters">
+            <button class="filter-btn" [class.active]="selectedLevel === null" (click)="selectedLevel = null">
+                Tous
+            </button>
+            @for (level of levels; track level.id) {
+            <button class="filter-btn" [class.active]="selectedLevel === level.id" (click)="filterByLevel(level.id)">
+                {{ level.name }}
+            </button>
+            }
+        </div>
+
+        <!-- Subjects Grid like interneturok -->
+        <div class="subjects-catalog">
+            @for (subject of filteredSubjects; track subject.id) {
+            <div class="subject-block" [style.--accent]="subject.colorCode">
+                <div class="subject-block-header">
+                    <span class="material-symbols-outlined subject-block-icon">{{ subject.icon }}</span>
+                    <h2>{{ subject.name }}</h2>
+                </div>
+                <div class="level-badges">
+                    @for (level of getAvailableLevels(subject); track level.id) {
+                    <a [routerLink]="['/subjects', subject.id, 'levels', level.id]" class="level-link"
+                        [class.highlighted]="selectedLevel === level.id">
+                        {{ level.name }}
+                    </a>
+                    }
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+</div>

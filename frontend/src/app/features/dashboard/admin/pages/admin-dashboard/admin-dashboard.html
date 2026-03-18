@@ -1,0 +1,52 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Super Administration 🛡️</h1>
+        <p class="page-subtitle">Vue globale des performances de la plateforme EduPlanet.</p>
+    </div>
+
+    <div class="stats-overview">
+        <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(14, 97, 217, 0.1); color: var(--color-primary);">
+                <span class="material-symbols-outlined">manage_accounts</span>
+            </div>
+            <div class="stat-info">
+                <h3>{{ stats.totalUsers }}</h3>
+                <p>Utilisateurs Inscrits</p>
+                <small class="trend positive">{{ stats.newUsersMonth }} ce mois</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(245, 166, 35, 0.1); color: #F5A623;">
+                <span class="material-symbols-outlined">library_books</span>
+            </div>
+            <div class="stat-info">
+                <h3>{{ stats.totalCourses }}</h3>
+                <p>Cours Publiés</p>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon" style="background: rgba(5, 150, 105, 0.1); color: #059669;">
+                <span class="material-symbols-outlined">sensors</span>
+            </div>
+            <div class="stat-info">
+                <h3>{{ stats.activeSessions }}</h3>
+                <p>Sessions en direct</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Charts placeholder -->
+    <div class="dashboard-card chart-placeholder">
+        <div class="card-header">
+            <h2>Croissance des inscriptions</h2>
+        </div>
+        <div class="card-content">
+            <div class="fake-chart">
+                <span class="material-symbols-outlined">bar_chart</span>
+                <p>Graphique de croissance (Données Simulées)</p>
+            </div>
+        </div>
+    </div>
+</div>

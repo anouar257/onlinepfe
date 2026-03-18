@@ -1,0 +1,242 @@
+.about-page {
+    min-height: 100vh;
+}
+
+/* Hero */
+.about-hero {
+    background: var(--gradient-orange);
+    padding: 80px 0;
+    text-align: center;
+    color: white;
+}
+
+.hero-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 900;
+        margin-bottom: 20px;
+        letter-spacing: -0.03em;
+    }
+}
+
+.highlight {
+    color: var(--color-orange-start);
+}
+
+.hero-desc {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+/* Mission */
+.about-mission {
+    padding: 80px 0;
+    background: white;
+}
+
+.mission-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.mission-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.mission-card {
+    padding: 36px;
+    border-radius: 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    text-align: center;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+    }
+
+    h3 {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--color-navy);
+        margin-bottom: 12px;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: #64748b;
+        line-height: 1.7;
+    }
+}
+
+.mission-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 18px;
+    background: var(--color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+
+    .material-symbols-outlined {
+        font-size: 30px;
+        color: white;
+    }
+}
+
+/* Features */
+.about-features {
+    padding: 80px 0;
+    background: #f8fafc;
+}
+
+.features-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--color-navy);
+        margin-bottom: 40px;
+        letter-spacing: -0.02em;
+    }
+}
+
+.features-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.feature-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 24px;
+    background: white;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateX(8px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+}
+
+.feature-icon-wrap {
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #eef2ff, #f0f4ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    .material-symbols-outlined {
+        font-size: 26px;
+        color: var(--color-primary);
+    }
+}
+
+.feature-text {
+    h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--color-navy);
+        margin-bottom: 4px;
+    }
+
+    p {
+        font-size: 0.85rem;
+        color: #64748b;
+        line-height: 1.5;
+    }
+}
+
+/* Tech */
+.about-tech {
+    padding: 80px 0;
+    background: white;
+}
+
+.tech-container {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+
+    h2 {
+        text-align: center;
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--color-navy);
+        margin-bottom: 40px;
+        letter-spacing: -0.02em;
+    }
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+
+.tech-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 28px 20px;
+    border-radius: 16px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s;
+
+    &:hover {
+        background: #eef2ff;
+        border-color: var(--color-primary);
+        transform: translateY(-2px);
+    }
+}
+
+.tech-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-navy);
+    margin-bottom: 4px;
+}
+
+.tech-desc {
+    font-size: 0.78rem;
+    color: #94a3b8;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+    .mission-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-hero h1 {
+        font-size: 1.8rem;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

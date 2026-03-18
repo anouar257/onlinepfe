@@ -1,0 +1,162 @@
+.dashboard-page {
+    animation: fade-in 0.4s ease-out;
+
+    .page-header {
+        margin-bottom: 32px;
+
+        .page-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--color-navy);
+            margin-bottom: 8px;
+        }
+
+        .page-subtitle {
+            color: #64748b;
+            font-size: 1.05rem;
+        }
+    }
+
+    .courses-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+
+        .course-card {
+            background: white;
+            border-radius: 20px;
+            border: 1px solid #f1f5f9;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            overflow: hidden;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+
+            &:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 10px 24px rgba(0,0,0,0.06);
+            }
+
+            .card-color-strip {
+                height: 6px;
+                width: 100%;
+            }
+
+            .card-content {
+                padding: 24px;
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+
+                .card-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    margin-bottom: 20px;
+
+                    h2 {
+                        margin: 0;
+                        font-size: 1.2rem;
+                        font-weight: 700;
+                        color: var(--color-navy);
+                    }
+
+                    .progress-badge {
+                        background: #f1f5f9;
+                        color: #64748b;
+                        padding: 4px 10px;
+                        border-radius: 20px;
+                        font-size: 0.8rem;
+                        font-weight: 700;
+                    }
+                }
+
+                .progress-container {
+                    margin-bottom: 20px;
+
+                    .progress-bar {
+                        height: 8px;
+                        background: #f1f5f9;
+                        border-radius: 4px;
+                        overflow: hidden;
+                        margin-bottom: 8px;
+
+                        .progress-fill {
+                            height: 100%;
+                            border-radius: 4px;
+                        }
+                    }
+
+                    .progress-stats {
+                        font-size: 0.8rem;
+                        color: #94a3b8;
+                        font-weight: 500;
+                    }
+                }
+
+                .next-module {
+                    background: #f8fafc;
+                    padding: 12px;
+                    border-radius: 12px;
+                    margin-bottom: 24px;
+                    flex-grow: 1;
+
+                    .label {
+                        display: block;
+                        font-size: 0.75rem;
+                        color: #94a3b8;
+                        margin-bottom: 4px;
+                    }
+
+                    .title {
+                        font-size: 0.95rem;
+                        font-weight: 600;
+                        color: var(--color-navy);
+                    }
+                }
+
+                .card-actions {
+                    display: flex;
+                    gap: 12px;
+
+                    .btn-primary {
+                        flex-grow: 1;
+                        padding: 12px;
+                        border-radius: 12px;
+                        border: none;
+                        color: white;
+                        font-weight: 700;
+                        cursor: pointer;
+                        transition: opacity 0.2s;
+
+                        &:hover {
+                            opacity: 0.9;
+                        }
+                    }
+
+                    .btn-icon {
+                        background: white;
+                        border: 1px solid #e2e8f0;
+                        width: 44px;
+                        border-radius: 12px;
+                        color: #64748b;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        transition: background 0.2s;
+
+                        &:hover {
+                            background: #f8fafc;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@keyframes fade-in {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,79 @@
+<div class="tutors-page">
+    <div class="breadcrumb">
+        <div class="bc"><a routerLink="/">Accueil</a><span>›</span><span class="cur">Professeurs Particuliers</span>
+        </div>
+    </div>
+
+    <div class="tutors-header">
+        <h1>Professeurs Particuliers</h1>
+        <p>Besoin d'aide supplémentaire ? Réservez une session en direct avec nos meilleurs enseignants certifiés.</p>
+    </div>
+
+    <div class="tutors-container">
+        <!-- Filters (Visual only for now) -->
+        <div class="tutors-filters">
+            <div class="filter-group">
+                <span class="material-symbols-outlined icon">subject</span>
+                <select>
+                    <option value="">Toutes les matières</option>
+                    <option value="math">Mathématiques</option>
+                    <option value="phys">Physique-Chimie</option>
+                    <option value="fr">Français</option>
+                    <option value="en">Anglais</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <span class="material-symbols-outlined icon">school</span>
+                <select>
+                    <option value="">Tous les niveaux</option>
+                    <option value="prim">Primaire</option>
+                    <option value="col">Collège</option>
+                    <option value="lyc">Lycée</option>
+                </select>
+            </div>
+            <button class="btn-filter">Filtrer</button>
+        </div>
+
+        <!-- Tutors Grid -->
+        <div class="tutors-grid">
+            @for (tutor of tutors; track tutor.id) {
+            <div class="tutor-card">
+                <div class="tutor-info">
+                    <img [src]="tutor.image" [alt]="tutor.name" class="tutor-avatar" />
+                    <div class="tutor-details">
+                        <h2>{{ tutor.name }}</h2>
+                        <span class="tutor-subject">{{ tutor.subject }}</span>
+                        <div class="tutor-meta">
+                            <span><span class="material-symbols-outlined">school</span> {{ tutor.level }}</span>
+                            <span><span class="material-symbols-outlined">work</span> {{ tutor.experience }}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="tutor-footer">
+                    <div class="tutor-stats">
+                        <div class="rating">
+                            <span class="material-symbols-outlined star">star</span>
+                            <strong>{{ tutor.rating }}</strong>
+                            <span class="reviews">({{ tutor.reviews }} avis)</span>
+                        </div>
+                        <div class="price">{{ tutor.price }}</div>
+                    </div>
+                    <button class="btn-book">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Réserver un cours
+                    </button>
+                </div>
+            </div>
+            }
+        </div>
+
+        <div class="become-tutor">
+            <div class="bt-content">
+                <h2>Vous êtes enseignant ?</h2>
+                <p>Rejoignez notre équipe d'experts et aidez des milliers d'élèves à réussir.</p>
+            </div>
+            <a routerLink="/register" class="btn-bt">Postuler maintenant</a>
+        </div>
+    </div>
+</div>

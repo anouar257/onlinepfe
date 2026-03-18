@@ -1,0 +1,22 @@
+# Root
+.vscode/
+.idea/
+*.log
+
+# Backend
+**/target/
+**/build/
+backend/.mvn/
+backend/**/mvnw
+backend/**/mvnw.cmd
+
+# Frontend
+frontend/node_modules/
+frontend/dist/
+frontend/.angular/
+frontend/*.log
+frontend/package-lock.json
+
+# OS
+.DS_Store
+Thumbs.db

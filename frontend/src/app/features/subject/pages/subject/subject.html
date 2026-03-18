@@ -1,0 +1,106 @@
+<div class="subject-page">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <div class="breadcrumb-container">
+            <a routerLink="/">Accueil</a>
+            <span class="sep">›</span>
+            <a routerLink="/catalog">Bibliothèque</a>
+            <span class="sep">›</span>
+            @if (subject && level) {
+            <span class="current">{{ subject.name }}, {{ level.name }}</span>
+            }
+        </div>
+    </div>
+
+    <div class="subject-container">
+        <div class="subject-layout">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                @if (subject && level) {
+                <div class="sidebar-header">
+                    <div class="sidebar-icon" [style.background]="subject.colorCode">
+                        <span class="material-symbols-outlined">{{ subject.icon }}</span>
+                    </div>
+                    <div>
+                        <h2 class="sidebar-title">{{ subject.name }}</h2>
+                        <p class="sidebar-meta">{{ level.name }} • {{ themes.length }} thèmes • {{ totalLessons }}
+                            leçons</p>
+                    </div>
+                </div>
+                }
+
+                <nav class="theme-nav">
+                    @for (theme of themes; track theme.id) {
+                    <button class="theme-btn" [class.active]="activeThemeId === theme.id"
+                        (click)="setActiveTheme(theme.id)">
+                        <span class="theme-order">Thème {{ theme.order }}</span>
+                        <span class="theme-name">{{ theme.name }}</span>
+                    </button>
+                    }
+                </nav>
+            </aside>
+
+            <!-- Main content -->
+            <main class="main-content">
+                <!-- View toggle & active theme header -->
+                @for (theme of themes; track theme.id) {
+                @if (activeThemeId === theme.id) {
+                <div class="content-header">
+                    <div>
+                        <h1>Thème {{ theme.order }}. {{ theme.name }}</h1>
+                        <span class="lesson-count">{{ lessonsByTheme[theme.id]?.length || 0 }} leçons</span>
+                    </div>
+                    <div class="view-toggle">
+                        <span>Vue</span>
+                        <button [class.active]="viewMode === 'list'" (click)="toggleView('list')">
+                            <span class="material-symbols-outlined">view_list</span>
+                        </button>
+                        <button [class.active]="viewMode === 'grid'" (click)="toggleView('grid')">
+                            <span class="material-symbols-outlined">grid_view</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Lessons grid/list -->
+                <div class="lessons-container" [class.grid-mode]="viewMode === 'grid'"
+                    [class.list-mode]="viewMode === 'list'">
+                    @for (lesson of lessonsByTheme[theme.id]; track lesson.id) {
+                    <a [routerLink]="['/lessons', lesson.id]" class="lesson-card">
+                        <div class="lesson-number">
+                            <span>{{ lesson.order | number: '2.0-0' }}</span>
+                            @if (lesson.hasVideo) {
+                            <span class="material-symbols-outlined play-icon">play_circle</span>
+                            }
+                        </div>
+                        <div class="lesson-info">
+                            <h3>{{ lesson.title }}</h3>
+                            <p class="lesson-summary">{{ lesson.summary }}</p>
+                        </div>
+                        <div class="lesson-actions">
+                            @if (lesson.hasVideo) {
+                            <span class="material-symbols-outlined action-icon" title="Vidéo">play_circle</span>
+                            }
+                            @if (lesson.hasNotes) {
+                            <span class="material-symbols-outlined action-icon" title="Résumé">description</span>
+                            }
+                            @if (lesson.hasDiscussion) {
+                            <span class="material-symbols-outlined action-icon" title="Discussion">forum</span>
+                            }
+                        </div>
+                    </a>
+                    }
+                </div>
+                }
+                }
+
+                @if (themes.length === 0) {
+                <div class="empty-state">
+                    <span class="material-symbols-outlined">school</span>
+                    <h3>Aucun contenu disponible</h3>
+                    <p>Les leçons pour cette matière et ce niveau seront bientôt disponibles.</p>
+                </div>
+                }
+            </main>
+        </div>
+    </div>
+</div>

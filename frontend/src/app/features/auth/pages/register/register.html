@@ -1,0 +1,128 @@
+<div class="auth-page">
+    <div class="auth-layout">
+        <!-- Left hero -->
+        <div class="auth-hero">
+            <div class="hero-overlay">
+                <a routerLink="/" class="auth-logo">
+                    <svg width="40" height="40" viewBox="0 0 32 32" fill="none">
+                        <rect width="32" height="32" rx="8" fill="white" />
+                        <path d="M8 22L16 10L24 22H8Z" fill="#F5A623" opacity="0.9" />
+                        <circle cx="16" cy="12" r="3" fill="#1B4B82" />
+                    </svg>
+                    <span>EduPlanet</span>
+                </a>
+                <div class="hero-text">
+                    <h2>Rejoignez EduPlanet</h2>
+                    <p>Créez un compte gratuit et accédez à tout notre contenu éducatif pour tous les niveaux.</p>
+                </div>
+                <div class="hero-features">
+                    <div class="feature">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        Accès aux résumés de cours
+                    </div>
+                    <div class="feature">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        Suivi de progression personnalisé
+                    </div>
+                    <div class="feature">
+                        <span class="material-symbols-outlined">check_circle</span>
+                        Participation aux discussions
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right form -->
+        <div class="auth-form-panel">
+            <div class="auth-form-container">
+                <div class="form-header">
+                    <h1>Créer un compte</h1>
+                    <p>Remplissez le formulaire pour vous inscrire</p>
+                </div>
+
+                <!-- Role Selection -->
+                <div class="role-selector">
+                    <label class="role-label">Je suis :</label>
+                    <div class="roles-grid">
+                        @for (role of roles; track role.value) {
+                        <button class="role-card" [class.selected]="selectedRole === role.value"
+                            (click)="selectRole(role.value)" type="button">
+                            <span class="material-symbols-outlined role-icon">{{ role.icon }}</span>
+                            <span class="role-name">{{ role.label }}</span>
+                            <span class="role-desc">{{ role.desc }}</span>
+                        </button>
+                        }
+                    </div>
+                </div>
+
+                <form class="auth-form" (ngSubmit)="onSubmit()">
+                    <div class="form-group">
+                        <label for="fullName">
+                            <span class="material-symbols-outlined">person</span>
+                            Nom complet
+                        </label>
+                        <input type="text" id="fullName" placeholder="Votre nom complet" [(ngModel)]="fullName"
+                            name="fullName" required />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">
+                            <span class="material-symbols-outlined">mail</span>
+                            Email
+                        </label>
+                        <input type="email" id="email" placeholder="votre@email.com" [(ngModel)]="email" name="email"
+                            required />
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="password">
+                                <span class="material-symbols-outlined">lock</span>
+                                Mot de passe
+                            </label>
+                            <input [type]="showPassword ? 'text' : 'password'" id="password"
+                                placeholder="Min. 8 caractères" [(ngModel)]="password" name="password" required />
+                        </div>
+                        <div class="form-group">
+                            <label for="confirmPassword">
+                                <span class="material-symbols-outlined">lock</span>
+                                Confirmer
+                            </label>
+                            <input [type]="showPassword ? 'text' : 'password'" id="confirmPassword"
+                                placeholder="Confirmer le mot de passe" [(ngModel)]="confirmPassword"
+                                name="confirmPassword" required />
+                        </div>
+                    </div>
+
+                    @if (password && confirmPassword && !passwordsMatch) {
+                    <p class="error-msg">Les mots de passe ne correspondent pas</p>
+                    }
+
+                    <label class="terms-check">
+                        <input type="checkbox" [(ngModel)]="agreeTerms" name="agreeTerms" />
+                        <span>J'accepte les <a href="#">conditions d'utilisation</a> et la <a href="#">politique de
+                                confidentialité</a></span>
+                    </label>
+
+                    @if (errorMessage) {
+                        <p class="error-msg" style="color: #e74c3c; margin-bottom: 20px; font-weight: 500; text-align: center; background: rgba(231,76,60,0.1); padding: 12px; border-radius: 8px;">{{ errorMessage }}</p>
+                    }
+
+                    <button type="submit" class="btn-submit" [disabled]="isLoading || !agreeTerms || !selectedRole">
+                        @if (isLoading) {
+                        <span class="spinner"></span>
+                        Inscription...
+                        } @else {
+                        Créer mon compte
+                        }
+                    </button>
+                </form>
+
+                <p class="auth-switch">
+                    Déjà un compte ?
+                    <a routerLink="/login">Se connecter</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

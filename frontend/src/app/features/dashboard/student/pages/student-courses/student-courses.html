@@ -1,0 +1,37 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Mes Cours 📚</h1>
+        <p class="page-subtitle">Poursuivez votre apprentissage là où vous l'avez laissé.</p>
+    </div>
+
+    <div class="courses-grid">
+        <div class="course-card" *ngFor="let course of enrolledCourses">
+            <div class="card-color-strip" [style.background]="course.color"></div>
+            <div class="card-content">
+                <div class="card-header">
+                    <h2>{{ course.title }}</h2>
+                    <span class="progress-badge">{{ course.progress }}%</span>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" [style.width.%]="course.progress" [style.background]="course.color"></div>
+                    </div>
+                    <div class="progress-stats">
+                        <span>{{ course.completedLessons }} / {{ course.totalLessons }} leçons</span>
+                    </div>
+                </div>
+
+                <div class="next-module">
+                    <span class="label">Prochain module :</span>
+                    <span class="title">{{ course.nextModule }}</span>
+                </div>
+
+                <div class="card-actions">
+                    <button class="btn-primary" [style.background]="course.color">Reprendre le cours</button>
+                    <button class="btn-icon"><span class="material-symbols-outlined">more_vert</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

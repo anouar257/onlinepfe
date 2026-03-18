@@ -1,0 +1,258 @@
+.contact-page {
+    min-height: 100vh;
+    background: #f8fafc;
+}
+
+.breadcrumb {
+    background: white;
+    border-bottom: 1px solid #e2e8f0;
+    padding: 14px 0;
+}
+
+.bc {
+    max-width: 1320px;
+    margin: 0 auto;
+    padding: 0 24px;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    a {
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: 500;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+
+    .cur {
+        color: #64748b;
+    }
+}
+
+.contact-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 48px 24px;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 48px;
+
+    h1 {
+        font-size: 2rem;
+        font-weight: 800;
+        color: var(--color-navy);
+        margin-bottom: 8px;
+    }
+
+    p {
+        color: #64748b;
+        font-size: 1rem;
+    }
+}
+
+.contact-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 32px;
+    align-items: start;
+}
+
+/* Info Side */
+.info-side {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.info-card {
+    padding: 24px;
+    border-radius: 16px;
+    background: white;
+    border: 1px solid #e2e8f0;
+    transition: all 0.3s;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+    }
+
+    h3 {
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: var(--color-navy);
+        margin: 12px 0 6px;
+    }
+
+    p {
+        font-size: 0.82rem;
+        color: #64748b;
+        line-height: 1.5;
+    }
+}
+
+.info-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    background: var(--c);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .material-symbols-outlined {
+        font-size: 24px;
+        color: white;
+    }
+}
+
+/* Form Side */
+.form-side {
+    background: white;
+    border-radius: 20px;
+    padding: 36px;
+    box-shadow: 0 2px 16px rgba(0, 0, 0, 0.04);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--color-navy);
+        margin-bottom: 8px;
+    }
+
+    input,
+    textarea {
+        width: 100%;
+        padding: 12px 16px;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        color: var(--color-navy);
+        font-family: inherit;
+        outline: none;
+        transition: all 0.2s;
+        background: white;
+
+        &:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px rgba(27, 75, 130, 0.1);
+        }
+
+        &::placeholder {
+            color: #94a3b8;
+        }
+    }
+
+    textarea {
+        resize: vertical;
+        min-height: 120px;
+    }
+}
+
+.btn-send {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    border: none;
+    border-radius: 12px;
+    background: var(--gradient-orange);
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s;
+    align-self: flex-start;
+
+    &:hover:not(:disabled) {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 16px rgba(27, 75, 130, 0.3);
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+    }
+
+    .material-symbols-outlined {
+        font-size: 18px;
+    }
+}
+
+.spinner {
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.success-msg {
+    text-align: center;
+    padding: 60px 40px;
+
+    .material-symbols-outlined {
+        font-size: 64px;
+        color: #059669;
+        margin-bottom: 16px;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+        color: var(--color-navy);
+        margin-bottom: 8px;
+    }
+
+    p {
+        font-size: 0.9rem;
+        color: #64748b;
+    }
+}
+
+@media (max-width:768px) {
+    .contact-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .info-side {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .info-card {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+}

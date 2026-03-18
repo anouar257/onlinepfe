@@ -1,0 +1,54 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Assiduité & Notes 📊</h1>
+        <p class="page-subtitle">Suivez les résultats détaillés de tous les tests de vos enfants.</p>
+    </div>
+
+    <div class="dashboard-card">
+        <div class="card-header">
+            <div class="filter-group">
+                <select class="form-select">
+                    <option value="all">Tous les enfants</option>
+                    <option value="lucas">Lucas Dubois</option>
+                    <option value="emma">Emma Dubois</option>
+                </select>
+                <select class="form-select">
+                    <option value="all">Toutes les matières</option>
+                    <option value="math">Mathématiques</option>
+                    <option value="physics">Physique</option>
+                </select>
+            </div>
+            <button class="btn-primary-outline"><span class="material-symbols-outlined">download</span> Télécharger Bulletin</button>
+        </div>
+        
+        <div class="table-responsive">
+            <table class="grades-table">
+                <thead>
+                    <tr>
+                        <th>Enfant</th>
+                        <th>Matière</th>
+                        <th>Évaluation</th>
+                        <th>Date</th>
+                        <th>Note</th>
+                        <th>Appréciation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let grade of grades">
+                        <td>
+                            <div class="child-cell">
+                                <img src="https://i.pravatar.cc/150?u={{grade.child}}" alt="Avatar">
+                                <span>{{ grade.child }}</span>
+                            </div>
+                        </td>
+                        <td><span class="subject-badge">{{ grade.subject }}</span></td>
+                        <td>{{ grade.title }}</td>
+                        <td class="date-cell">{{ grade.date }}</td>
+                        <td class="score-cell"><strong>{{ grade.score }}</strong></td>
+                        <td><span class="status-badge" [class]="grade.status.toLowerCase()">{{ grade.status }}</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

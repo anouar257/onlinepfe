@@ -1,0 +1,69 @@
+<div class="dashboard-page">
+    <div class="page-header">
+        <h1 class="page-title">Bonjour, Lucas ! 🚀</h1>
+        <p class="page-subtitle">Prêt pour apprendre de nouvelles choses aujourd'hui ?</p>
+    </div>
+
+    <div class="dashboard-grid">
+        <!-- Next Live Classes -->
+        <div class="dashboard-card schedule-card">
+            <div class="card-header">
+                <h2>Prochaines leçons en direct</h2>
+                <button class="btn-text" routerLink="/dashboard/student/schedule">Voir tout le planning</button>
+            </div>
+            <div class="card-content">
+                <div class="live-class-item" *ngFor="let cls of upcomingClasses">
+                    <div class="time-block">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <strong>{{ cls.time }}</strong>
+                        <small>{{ cls.duration }}</small>
+                    </div>
+                    <div class="class-info">
+                        <span class="subject-tag">{{ cls.subject }}</span>
+                        <h4>{{ cls.topic }}</h4>
+                        <p>Avec {{ cls.teacher }}</p>
+                    </div>
+                    <button class="btn-primary-outline">Rejoindre</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- My Courses Progress -->
+        <div class="dashboard-card courses-card">
+            <div class="card-header">
+                <h2>Mes cours en cours</h2>
+                <button class="btn-text" routerLink="/dashboard/student/courses">Catalogue</button>
+            </div>
+            <div class="card-content">
+                <div class="course-progress-item" *ngFor="let course of activeCourses">
+                    <div class="course-header">
+                        <h4>{{ course.title }}</h4>
+                        <span>{{ course.progress }}%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" [style.width.%]="course.progress" [style.background]="course.color"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Grades / Assignments -->
+        <div class="dashboard-card tasks-card">
+            <div class="card-header">
+                <h2>Dernières notes</h2>
+            </div>
+            <div class="card-content">
+                <div class="grade-item" *ngFor="let grade of recentGrades">
+                    <div class="icon-box">
+                        <span class="material-symbols-outlined">verified</span>
+                    </div>
+                    <div class="grade-info">
+                        <h4>{{ grade.subject }}</h4>
+                        <p>Dernier test complété</p>
+                    </div>
+                    <div class="grade-score">{{ grade.score }}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
