@@ -1,7 +1,7 @@
 <div class="topbar-container">
     <div class="search-bar">
         <span class="material-symbols-outlined">search</span>
-        <input type="text" placeholder="Rechercher des cours, matières, pro...">
+        <input type="text" placeholder="Rechercher des cours, matières, professeurs...">
     </div>
 
     <div class="topbar-actions">
@@ -13,12 +13,12 @@
             <span class="material-symbols-outlined">mail</span>
         </button>
         <div class="user-profile">
-            <img src="https://i.pravatar.cc/150?img=32" alt="Profil Parent">
+            <img [src]="'https://i.pravatar.cc/150?u=' + userEmail" [alt]="'Profil ' + userRoleLabel">
             <div class="user-info">
-                <span class="user-name">Isabelle Durant</span>
-                <span class="user-role">Parent</span>
+                <span class="user-name">{{ userName }}</span>
+                <span class="user-role">{{ userRoleLabel }}</span>
             </div>
-            <span class="material-symbols-outlined">expand_more</span>
+            <button class="logout-btn" (click)="logout()">Déconnexion</button>
         </div>
     </div>
 </div>

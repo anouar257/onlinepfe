@@ -1,8 +1,8 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../../../core/services/auth.service';
+import { AuthService, RoleOption } from '../../../../core/services/auth.service';
 
 @Component({
     selector: 'app-register',
@@ -11,7 +11,7 @@ import { AuthService } from '../../../../core/services/auth.service';
     templateUrl: './register.html',
     styleUrl: './register.scss',
 })
-export class Register {
+export class Register implements OnInit {
     fullName = '';
     email = '';
     password = '';
@@ -25,14 +25,21 @@ export class Register {
     private authService = inject(AuthService);
     private router = inject(Router);
 
-    roles = [
-        { value: 'STUDENT', label: 'Étudiant', icon: 'school', desc: 'Je suis un élève ou étudiant' },
-        { value: 'PARENT', label: 'Parent', icon: 'family_restroom', desc: "Je suis parent d'un élève" },
-        { value: 'TEACHER', label: 'Enseignant', icon: 'person', desc: 'Je suis professeur/enseignant' },
-    ];
+    roles: RoleOption[] = [];
+
+    ngOnInit(): void {
+        this.authService.getAvailableRoles().subscribe({
+            next: (roles) => {
+                this.roles = roles;
+            },
+            error: () => {
+                this.roles = [];
+            }
+        });
+    }
 
     selectRole(role: string): void {
-        this.selectedRole = role;
+        this.selectedRole = this.authService.normalizeRole(role) || role;
     }
 
     togglePasswordVisibility(): void {
@@ -60,11 +67,7 @@ export class Register {
         this.authService.register(payload).subscribe({
             next: (res: any) => {
                 this.isLoading = false;
-                const role = res.role.toUpperCase();
-                if (role.includes('STUDENT')) this.router.navigate(['/dashboard/student']);
-                else if (role.includes('TEACHER')) this.router.navigate(['/dashboard/teacher']);
-                else if (role.includes('ADMIN')) this.router.navigate(['/dashboard/admin']);
-                else this.router.navigate(['/dashboard/parent']);
+                this.router.navigate([this.authService.getDashboardRoute(res?.role)]);
             },
             error: (err: any) => {
                 this.isLoading = false;

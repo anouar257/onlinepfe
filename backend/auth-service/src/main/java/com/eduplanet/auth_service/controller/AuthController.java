@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -33,5 +35,10 @@ public class AuthController {
         } catch (Exception e) {
             return ResponseEntity.status(401).body(null);
         }
+    }
+
+    @GetMapping("/roles")
+    public ResponseEntity<List<String>> getRoles() {
+        return ResponseEntity.ok(authService.getAvailableRoles());
     }
 }

@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-parent-grades',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './parent-grades.html',
   styleUrls: ['./parent-grades.scss']
 })

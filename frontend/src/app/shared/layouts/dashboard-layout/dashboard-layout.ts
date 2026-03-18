@@ -1,24 +1,23 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { SidebarComponent } from '../../components/sidebar/sidebar';
+import { TopbarComponent } from '../../components/topbar/topbar';
 
 @Component({
   selector: 'app-dashboard-layout',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, SidebarComponent, TopbarComponent],
   template: `
     <div class="dashboard-wrapper">
-      <!-- Sidebar placeholder -->
       <aside class="dashboard-sidebar">
-         <div>EduPlanet Sidebar</div>
+        <app-sidebar />
       </aside>
       
       <div class="dashboard-main">
-        <!-- Topbar placeholder -->
         <header class="dashboard-topbar">
-           <div>Topbar</div>
+          <app-topbar />
         </header>
-        
-        <!-- Content Area -->
+
         <main class="dashboard-content">
           <router-outlet />
         </main>

@@ -9,6 +9,7 @@ import com.eduplanet.auth_service.repository.AppRoleRepository;
 import com.eduplanet.auth_service.repository.AppUserRepository;
 import com.eduplanet.auth_service.security.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -16,7 +17,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class AuthService {
@@ -39,6 +44,9 @@ public class AuthService {
     @Autowired
     private JwtUtil jwtUtil;
 
+    @Value("${auth.public-registration-roles:ROLE_STUDENT,ROLE_PARENT,ROLE_TEACHER}")
+    private List<String> configuredPublicRegistrationRoles;
+
     public AuthResponse register(RegisterRequest request) {
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("L'email est déjà utilisé !");
@@ -52,6 +60,11 @@ public class AuthService {
         String requestedRole = request.getRole() != null ? request.getRole().toUpperCase() : "STUDENT";
         if (!requestedRole.startsWith("ROLE_")) {
             requestedRole = "ROLE_" + requestedRole;
+        }
+
+        Set<String> allowedPublicRoles = getNormalizedPublicRegistrationRoles();
+        if (!allowedPublicRoles.contains(requestedRole)) {
+            throw new RuntimeException("Rôle non autorisé pour l'inscription publique");
         }
 
         Optional<AppRole> roleOpt = roleRepository.findByName(requestedRole);
@@ -85,4 +98,26 @@ public class AuthService {
 
         return new AuthResponse(jwt, user.getEmail(), roleName);
     }
+
+    public List<String> getAvailableRoles() {
+        Set<String> allowedPublicRoles = getNormalizedPublicRegistrationRoles();
+
+        Set<String> roles = new LinkedHashSet<>(allowedPublicRoles);
+
+        roleRepository.findAll().stream()
+            .map(AppRole::getName)
+            .filter(allowedPublicRoles::contains)
+            .forEach(roles::add);
+
+        return List.copyOf(roles);
+    }
+
+        private Set<String> getNormalizedPublicRegistrationRoles() {
+        return configuredPublicRegistrationRoles.stream()
+            .map(String::trim)
+            .filter(s -> !s.isBlank())
+            .map(String::toUpperCase)
+            .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
+            .collect(Collectors.toCollection(LinkedHashSet::new));
+        }
 }

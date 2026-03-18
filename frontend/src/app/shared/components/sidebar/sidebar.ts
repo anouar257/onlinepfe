@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { RouterLink, RouterLinkActive, Router, NavigationEnd } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { filter } from 'rxjs/operators';
+import { AuthService } from '../../../core/services/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -46,31 +47,40 @@ export class SidebarComponent implements OnInit {
         { label: 'Configuration', icon: 'settings', route: '/dashboard/admin/config' },
     ];
 
-    constructor(private router: Router) {
-        this.updateMenu(this.router.url);
+    constructor(private router: Router, private authService: AuthService) {
+        this.updateMenu(this.router.url, this.authService.getRole());
     }
 
     ngOnInit() {
         this.router.events.pipe(
             filter(event => event instanceof NavigationEnd)
         ).subscribe((event: any) => {
-            this.updateMenu(event.urlAfterRedirects);
+            this.updateMenu(event.urlAfterRedirects, this.authService.getRole());
         });
     }
 
-    private updateMenu(url: string) {
-        if (url.includes('/dashboard/student')) {
-            this.currentRole = 'ÉTUDIANT';
+    private updateMenu(_url: string, userRole: string) {
+        const normalizedRole = this.authService.normalizeRole(userRole);
+
+        if (normalizedRole === 'STUDENT') {
+            this.currentRole = this.authService.getRoleLabel('STUDENT');
             this.menuItems = this.studentMenu;
-        } else if (url.includes('/dashboard/teacher')) {
-            this.currentRole = 'PROFESSEUR';
-            this.menuItems = this.teacherMenu;
-        } else if (url.includes('/dashboard/admin')) {
-            this.currentRole = 'ADMINISTRATEUR';
-            this.menuItems = this.adminMenu;
-        } else {
-            this.currentRole = 'PARENT';
-            this.menuItems = this.parentMenu;
+            return;
         }
+
+        if (normalizedRole === 'TEACHER') {
+            this.currentRole = this.authService.getRoleLabel('TEACHER');
+            this.menuItems = this.teacherMenu;
+            return;
+        }
+
+        if (normalizedRole === 'ADMIN') {
+            this.currentRole = this.authService.getRoleLabel('ADMIN');
+            this.menuItems = this.adminMenu;
+            return;
+        }
+
+        this.currentRole = this.authService.getRoleLabel('PARENT');
+        this.menuItems = this.parentMenu;
     }
 }

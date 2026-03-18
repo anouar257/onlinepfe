@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { GuestLayoutComponent } from './shared/layouts/guest-layout/guest-layout';
 import { DashboardLayoutComponent } from './shared/layouts/dashboard-layout/dashboard-layout';
+import { roleGuard } from './core/guards/role.guard';
 
 export const routes: Routes = [
     {
@@ -77,51 +78,71 @@ export const routes: Routes = [
                 path: 'parent',
                 loadComponent: () => import('./features/dashboard/parent/pages/parent-dashboard/parent-dashboard').then((m) => m.ParentDashboard),
                 title: 'Tableau de bord Parent — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'PARENT' }
             },
             {
                 path: 'parent/grades',
                 loadComponent: () => import('./features/dashboard/parent/pages/parent-grades/parent-grades').then((m) => m.ParentGrades),
                 title: 'Assiduité & Notes — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'PARENT' }
             },
             {
                 path: 'parent/billing',
                 loadComponent: () => import('./features/dashboard/parent/pages/parent-billing/parent-billing').then((m) => m.ParentBilling),
                 title: 'Abonnements — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'PARENT' }
             },
             {
                 path: 'student',
                 loadComponent: () => import('./features/dashboard/student/pages/student-dashboard/student-dashboard').then((m) => m.StudentDashboard),
                 title: 'Tableau de bord Étudiant — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'STUDENT' }
             },
             {
                 path: 'student/courses',
                 loadComponent: () => import('./features/dashboard/student/pages/student-courses/student-courses').then((m) => m.StudentCourses),
                 title: 'Mes Cours — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'STUDENT' }
             },
             {
                 path: 'student/schedule',
                 loadComponent: () => import('./features/dashboard/student/pages/student-schedule/student-schedule').then((m) => m.StudentSchedule),
                 title: 'Mon Planning — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'STUDENT' }
             },
             {
                 path: 'teacher',
                 loadComponent: () => import('./features/dashboard/teacher/pages/teacher-dashboard/teacher-dashboard').then((m) => m.TeacherDashboard),
                 title: 'Tableau de bord Professeur — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'TEACHER' }
             },
             {
                 path: 'teacher/courses',
                 loadComponent: () => import('./features/dashboard/teacher/pages/teacher-courses/teacher-courses').then((m) => m.TeacherCourses),
                 title: 'Gestion des Cours — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'TEACHER' }
             },
             {
                 path: 'admin',
                 loadComponent: () => import('./features/dashboard/admin/pages/admin-dashboard/admin-dashboard').then((m) => m.AdminDashboard),
                 title: 'Super Administration — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'ADMIN' }
             },
             {
                 path: 'admin/users',
                 loadComponent: () => import('./features/dashboard/admin/pages/admin-users/admin-users').then((m) => m.AdminUsers),
                 title: 'Gestion des Utilisateurs — EduPlanet',
+                canActivate: [roleGuard],
+                data: { role: 'ADMIN' }
             }
         ]
     },

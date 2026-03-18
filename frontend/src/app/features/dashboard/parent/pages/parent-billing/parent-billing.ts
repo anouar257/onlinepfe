@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-parent-billing',
   standalone: true,
+  imports: [CommonModule],
   templateUrl: './parent-billing.html',
   styleUrls: ['./parent-billing.scss']
 })

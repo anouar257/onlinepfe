@@ -33,11 +33,7 @@ export class Login {
         this.authService.login({ email: this.email, password: this.password }).subscribe({
             next: (res: any) => {
                 this.isLoading = false;
-                const role = res.role.toUpperCase();
-                if (role.includes('STUDENT')) this.router.navigate(['/dashboard/student']);
-                else if (role.includes('TEACHER')) this.router.navigate(['/dashboard/teacher']);
-                else if (role.includes('ADMIN')) this.router.navigate(['/dashboard/admin']);
-                else this.router.navigate(['/dashboard/parent']);
+                this.router.navigate([this.authService.getDashboardRoute(res?.role)]);
             },
             error: (err: any) => {
                 this.isLoading = false;
